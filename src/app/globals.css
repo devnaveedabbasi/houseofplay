@@ -1,0 +1,268 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* =========================
+   PRIMARY (GRAY BASE #383F43)
+========================= */
+
+.bg-primary-50 {
+  background-color: #f4f5f5;
+}
+
+.bg-primary-100 {
+  background-color: #dfe2e3;
+}
+
+.bg-primary-200 {
+  background-color: #c2c7c9;
+}
+
+.bg-primary-300 {
+  background-color: #9ca3a7;
+}
+
+.bg-primary-400 {
+  background-color: #6f787d;
+}
+
+.bg-primary-500 {
+  background-color: #383F43;
+}
+
+.bg-primary-600 {
+  background-color: #2f3539;
+}
+
+.bg-primary-700 {
+  background-color: #272c2f;
+}
+
+.bg-primary-800 {
+  background-color: #1f2325;
+}
+
+.bg-primary-900 {
+  background-color: #141718;
+}
+
+.text-primary-50 {
+  color: #f4f5f5;
+}
+
+.text-primary-100 {
+  color: #dfe2e3;
+}
+
+.text-primary-200 {
+  color: #c2c7c9;
+}
+
+.text-primary-300 {
+  color: #9ca3a7;
+}
+
+.text-primary-400 {
+  color: #6f787d;
+}
+
+.text-primary-500 {
+  color: #383F43;
+}
+
+.text-primary-600 {
+  color: #2f3539;
+}
+
+.text-primary-700 {
+  color: #272c2f;
+}
+
+.text-primary-800 {
+  color: #1f2325;
+}
+
+.text-primary-900 {
+  color: #141718;
+}
+
+.border-primary-100 {
+  border-color: #dfe2e3;
+}
+
+.border-primary-200 {
+  border-color: #c2c7c9;
+}
+
+.border-primary-300 {
+  border-color: #9ca3a7;
+}
+
+.border-primary-700 {
+  border-color: #272c2f;
+}
+
+.border-primary-800 {
+  border-color: #1f2325;
+}
+
+.border-primary-900 {
+  border-color: #141718;
+}
+
+/* =========================
+   SECONDARY (GREEN #4CA048)
+========================= */
+
+.bg-secondary-50 {
+  background-color: #eef8ed;
+}
+
+.bg-secondary-100 {
+  background-color: #d8efd6;
+}
+
+.bg-secondary-200 {
+  background-color: #b6dfb2;
+}
+
+.bg-secondary-300 {
+  background-color: #8ccc89;
+}
+
+.bg-secondary-400 {
+  background-color: #67b864;
+}
+
+.bg-secondary-500 {
+  background-color: #4CA048;
+}
+
+.bg-secondary-600 {
+  background-color: #3e853b;
+}
+
+.bg-secondary-700 {
+  background-color: #326b30;
+}
+
+.bg-secondary-800 {
+  background-color: #285526;
+}
+
+.bg-secondary-900 {
+  background-color: #1f431d;
+}
+
+.text-secondary-50 {
+  color: #eef8ed;
+}
+
+.text-secondary-100 {
+  color: #d8efd6;
+}
+
+.text-secondary-200 {
+  color: #b6dfb2;
+}
+
+.text-secondary-300 {
+  color: #8ccc89;
+}
+
+.text-secondary-400 {
+  color: #67b864;
+}
+
+.text-secondary-500 {
+  color: #4CA048;
+}
+
+.text-secondary-600 {
+  color: #3e853b;
+}
+
+.text-secondary-700 {
+  color: #326b30;
+}
+
+.text-secondary-800 {
+  color: #285526;
+}
+
+.text-secondary-900 {
+  color: #1f431d;
+}
+
+.border-secondary-100 {
+  border-color: #d8efd6;
+}
+
+.border-secondary-200 {
+  border-color: #b6dfb2;
+}
+
+.border-secondary-300 {
+  border-color: #8ccc89;
+}
+
+.border-secondary-700 {
+  border-color: #326b30;
+}
+
+.border-secondary-800 {
+  border-color: #285526;
+}
+
+.border-secondary-900 {
+  border-color: #1f431d;
+}
+
+/* =========================
+   HOVER STATES
+========================= */
+
+.hover\:bg-primary-600:hover {
+  background-color: #2f3539;
+}
+
+.hover\:bg-primary-700:hover {
+  background-color: #272c2f;
+}
+
+.hover\:bg-secondary-600:hover {
+  background-color: #3e853b;
+}
+
+.hover\:bg-secondary-700:hover {
+  background-color: #326b30;
+}
+
+.hover\:text-secondary-600:hover {
+  color: #3e853b;
+}
+
+/* =========================
+   RING COLORS
+========================= */
+
+.focus\:ring-primary:focus {
+  --tw-ring-color: #383F43;
+}
+
+.focus\:ring-secondary:focus {
+  --tw-ring-color: #4CA048;
+}
+
+/* =========================
+   BASE
+========================= */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-poppins), "Poppins", system-ui, -apple-system, sans-serif;
+}
