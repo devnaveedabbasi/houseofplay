@@ -53,35 +53,40 @@ const navConfig = {
           icon: Package,
         },
         {
+          name: "Estimate",
+          href: "/dashboard/estimate",
+          icon: Package,
+        }, {
+          name: "Add Raw",
+          href: "/dashboard/products/add-raw",
+          icon: Package,
+        },
+        {
+          name: "Add Theme",
+          href: "/dashboard/products/add-theme",
+          icon: Package,
+        },
+        {
           name: "Variants",
           href: "/dashboard/products/variants",
           icon: Package,
         },
         {
-          name: "Categories",
-          href: "/dashboard/products/categories",
+          name: "Add Manufactured",
+          href: "/dashboard/products/add-manufactured",
           icon: Package,
         },
         {
-          name: "Brands",
-          href: "/dashboard/products/brands",
+          name: "Add Composite",
+          href: "/dashboard/products/add-composite",
           icon: Package,
         },
         {
-          name: "Stock Management",
-          href: "/dashboard/products/stock",
+          name: "Add External",
+          href: "/dashboard/products/add-external",
           icon: Package,
         },
-        {
-          name: "Price List",
-          href: "/dashboard/products/pricing",
-          icon: Package,
-        },
-        {
-          name: "Product Reviews",
-          href: "/dashboard/products/reviews",
-          icon: Package,
-        },
+
       ],
     },
 
@@ -121,11 +126,16 @@ const navConfig = {
           href: "/dashboard/settings",
           icon: Settings,
         },
+        {
+          name: "Change Password",
+          href: "/dashboard/change-password",
+          icon: UserCog,
+        },
       ],
     },
   ],
 
-  manager: [
+   manager: [
     {
       groupLabel: "CSV Management",
       groupIcon: FileText,
@@ -153,20 +163,40 @@ const navConfig = {
           icon: Package,
         },
         {
+          name: "Estimate",
+          href: "/dashboard/estimate",
+          icon: Package,
+        }, {
+          name: "Add Raw",
+          href: "/dashboard/products/add-raw",
+          icon: Package,
+        },
+        {
+          name: "Add Theme",
+          href: "/dashboard/products/add-theme",
+          icon: Package,
+        },
+        {
           name: "Variants",
           href: "/dashboard/products/variants",
           icon: Package,
         },
         {
-          name: "Categories",
-          href: "/dashboard/products/categories",
+          name: "Add Manufactured",
+          href: "/dashboard/products/add-manufactured",
           icon: Package,
         },
         {
-          name: "Stock Management",
-          href: "/dashboard/products/stock",
+          name: "Add Composite",
+          href: "/dashboard/products/add-composite",
           icon: Package,
         },
+        {
+          name: "Add External",
+          href: "/dashboard/products/add-external",
+          icon: Package,
+        },
+
       ],
     },
 
@@ -178,6 +208,16 @@ const navConfig = {
           name: "Supplier Management",
           href: "/dashboard/suppliers",
           icon: Truck,
+        },
+        {
+          name: "User Management",
+          href: "/dashboard/users",
+          icon: Users,
+        },
+        {
+          name: "Dummy Users",
+          href: "/dashboard/dummy-users",
+          icon: UserCog,
         },
       ],
     },
@@ -195,6 +235,11 @@ const navConfig = {
           name: "Platform Settings",
           href: "/dashboard/settings",
           icon: Settings,
+        },
+        {
+          name: "Change Password",
+          href: "/dashboard/change-password",
+          icon: UserCog,
         },
       ],
     },
@@ -214,6 +259,11 @@ const navConfig = {
           name: "My Orders",
           href: "/dashboard/my-orders",
           icon: FileText,
+        },
+        {
+          name: "Change Password",
+          href: "/dashboard/change-password",
+          icon: UserCog,
         },
       ],
     },
@@ -299,11 +349,10 @@ export default function Sidebar({ open, onClose }) {
         <Link
           href="/dashboard"
           onClick={onClose}
-          className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 ${
-            pathname === "/dashboard"
+          className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 ${pathname === "/dashboard"
               ? "bg-green-600 text-white font-semibold"
               : "text-gray-400 hover:bg-[#1f2325] hover:text-white"
-          }`}
+            }`}
         >
           <LayoutDashboard size={17} />
           <span className="text-sm">Dashboard</span>
@@ -327,11 +376,10 @@ export default function Sidebar({ open, onClose }) {
               {/* Group Header */}
               <button
                 onClick={() => toggleGroup(group.groupLabel)}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl transition-all duration-200 ${
-                  groupActive
+                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl transition-all duration-200 ${groupActive
                     ? "text-white bg-[#1f2325]"
                     : "text-gray-400"
-                }`}
+                  }`}
               >
                 <div className="flex items-center gap-2.5">
                   <GroupIcon size={15} />
@@ -343,9 +391,8 @@ export default function Sidebar({ open, onClose }) {
 
                 <ChevronDown
                   size={14}
-                  className={`transition-transform duration-200 ${
-                    isOpen ? "rotate-180" : ""
-                  }`}
+                  className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
@@ -369,11 +416,10 @@ export default function Sidebar({ open, onClose }) {
                         key={item.href}
                         href={item.href}
                         onClick={onClose}
-                        className={`flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-150 text-sm ${
-                          active
+                        className={`flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-150 text-sm ${active
                             ? "bg-green-600 text-white font-semibold"
                             : "text-gray-400 hover:bg-[#1f2325] hover:text-white"
-                        }`}
+                          }`}
                       >
                         <Icon size={15} />
                         <span>{item.name}</span>

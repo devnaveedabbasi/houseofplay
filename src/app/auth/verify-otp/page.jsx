@@ -264,7 +264,7 @@ const onSubmit = async (data) => {
             </Button>
           ) : (
             <p className="text-gray-500 text-sm">
-              Resend code in <span className="font-mono font-medium text-primary-600">{timer}s</span>
+              Resend code in <span className="font-medium text-primary-600">{timer}s</span>
             </p>
           )}
         </div>

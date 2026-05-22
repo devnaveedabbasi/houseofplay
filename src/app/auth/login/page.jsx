@@ -78,7 +78,7 @@ const onSubmit = async (data) => {
                />
              </div>
 <div className="z-10 mt-8">
-            <h1 className="text-4xl font-black mt-28  leading-tight">
+            <h1 className="text-4xl  mt-28  leading-tight">
               Welcome <br />
               Back 
             </h1>
@@ -97,7 +97,7 @@ const onSubmit = async (data) => {
         {/* RIGHT SIDE */}
         <div className="p-8 sm:p-10 lg:p-14">
 
-          <h2 className="text-4xl font-black text-primary-600">
+          <h2 className="text-4xl  text-primary-600">
             Sign In
           </h2>
 
@@ -126,6 +126,16 @@ const onSubmit = async (data) => {
               {...register("password")}
               error={errors.password?.message}
             />
+
+            {/* FORGOT PASSWORD */}
+            <div className="flex justify-end -mt-2">
+              <Link
+                href="/auth/forgot-password"
+                className="text-xs text-secondary-500 font-semibold hover:text-secondary-600 transition"
+              >
+                Forgot Password?
+              </Link>
+            </div>
 
             {/* BUTTON */}
             <Button

@@ -33,7 +33,7 @@ export const sendOtpEmail = async (to, otp) => {
     to,
     subject: 'Your verification code',
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; border-radius: 8px; padding: 32px;">
+      <div style="font-family: 'Poppins', Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; border-radius: 8px; padding: 32px;">
         <h2 style="color: #111; margin-top: 0;">Verify your email</h2>
         <p style="color: #555;">Use the code below to verify your email address. It expires in <strong>10 minutes</strong>.</p>
         <div style="font-size: 36px; letter-spacing: 8px; font-weight: bold; color: #4CA048; margin: 28px 0; text-align: center;">

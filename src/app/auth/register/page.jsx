@@ -89,7 +89,7 @@ export default function RegisterPage() {
 
           {/* CENTER CONTENT */}
           <div className="z-10 space-y-5">
-            <h1 className="text-[42px] font-black leading-[1.1] tracking-tight text-white">
+            <h1 className="text-[42px]  leading-[1.1] tracking-tight text-white">
               Start your <br />
               journey{" "}
               <span className="text-secondary-300">today.</span>
@@ -120,7 +120,7 @@ export default function RegisterPage() {
         {/* RIGHT */}
         <div className="p-8 sm:p-10 lg:p-14">
 
-          <h2 className="text-4xl font-black text-primary-600">
+          <h2 className="text-4xl  text-primary-600">
             Register
           </h2>
 

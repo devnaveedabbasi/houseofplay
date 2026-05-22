@@ -1,9 +1,39 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-poppins);
+  --font-mono: var(--font-poppins);
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
+
+html {
+  scroll-padding-top: 80px;
+}
+
+* {
+  font-family: var(--font-poppins), sans-serif !important;
+}
+
+/* Step transition animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeInUp 200ms ease-out both;
+}
+
 
 /* =========================
    PRIMARY (GRAY BASE #383F43)
@@ -264,5 +294,4 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-poppins), "Poppins", system-ui, -apple-system, sans-serif;
 }

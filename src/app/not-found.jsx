@@ -23,7 +23,7 @@ export default function NotFound() {
         </div>
 
         {/* Title */}
-        <h1 className="text-5xl font-black text-primary-600 mt-6">
+        <h1 className="text-5xl  text-primary-600 mt-6">
           404
         </h1>
 
