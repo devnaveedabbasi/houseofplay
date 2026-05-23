@@ -42,9 +42,9 @@ export default function Step4ReviewSubmit({
     }
   }, [productType]);
 
-  const thumbUrl = useMemo(() => {
-    return data.thumbnail ? URL.createObjectURL(data.thumbnail) : null;
-  }, [data.thumbnail]);
+  // const thumbUrl = useMemo(() => {
+  //   return data.thumbnail ? URL.createObjectURL(data.thumbnail) : null;
+  // }, [data.thumbnail]);
 
   const copyToClipboard = () => {
     if (!data.generatedSKU) return;
@@ -70,7 +70,7 @@ export default function Step4ReviewSubmit({
         className="space-y-6"
       >
         {/* IMAGE PREVIEW */}
-        {thumbUrl && (
+        {/* {thumbUrl && (
           <div className="bg-white border rounded-xl p-3 w-fit">
             <img
               src={thumbUrl}
@@ -78,7 +78,7 @@ export default function Step4ReviewSubmit({
               className="w-32 h-32 object-cover rounded-lg"
             />
           </div>
-        )}
+        )} */}
 
         {/* MAIN CARD */}
         <div className="bg-gray-50 rounded-xl p-5 space-y-6">
