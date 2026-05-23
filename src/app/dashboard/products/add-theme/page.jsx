@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSuppliers, createSupplier, createRawMaterial } from "@/store/rawMaterialSlice";
+import { fetchSuppliers, createSupplier } from "@/store/rawMaterialSlice";
+import { createTheme } from "@/store/themeSlice";
 import { useRouter } from "next/navigation";
 import { generateSKU } from "@/utils/generateSKU";
 import StepIndicator from "@/components/ui/StepIndicator";
@@ -34,38 +35,37 @@ const INITIAL_FORM = {
   installationTimeMins: "0",
   weightKgs: "0",
 
-  images: [
-  ],
+  // No multiple images for theme
+  images: [],
 
   // Step 3
   supplier: "",
   rawMaterialPrice: "0",
   supplierSKU: "",
 };
-// MOCK_SUPPLIERS removed, now coming from Redux
 
 const STEP_LABELS = ["Product Details", "Measurements", "Supplier Info", "Review"];
 
-export default function AddRawMaterialPage() {
+export default function AddThemePage() {
   const [step, setStep] = useState(1);
-  // BUG 2 FIX: track completed steps in a persistent array
   const [completedSteps, setCompletedSteps] = useState([]);
   const [formData, setFormData] = useState(INITIAL_FORM);
   const [submitted, setSubmitted] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
-  const { suppliers, loading } = useSelector((state) => state.rawMaterial);
+
+  const { suppliers } = useSelector((state) => state.rawMaterial);
+  const { loading } = useSelector((state) => state.theme);
 
   const [isPageLoading, setIsPageLoading] = useState(true);
 
   useEffect(() => {
     dispatch(fetchSuppliers())
       .unwrap()
-      .catch(() => {}) // Ignore fetch errors here
+      .catch(() => {})
       .finally(() => setIsPageLoading(false));
   }, [dispatch]);
 
-  // BUG 1 FIX: scroll to top on step change, accounting for topbar
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [step]);
@@ -73,7 +73,6 @@ export default function AddRawMaterialPage() {
   const updateForm = (patch) =>
     setFormData((prev) => ({ ...prev, ...patch }));
 
-  // BUG 2 FIX: mark current step completed before advancing
   const handleNext = () => {
     setCompletedSteps((prev) => [...new Set([...prev, step])]);
     if (step === 3) {
@@ -91,7 +90,7 @@ export default function AddRawMaterialPage() {
     data.append("standard", formData.standard);
     if (formData.description) data.append("description", formData.description);
     data.append("denominationPackSize", formData.denominationPackSize);
-    
+
     data.append("measurements", JSON.stringify({
       lengthMM: Number(formData.lengthMM) || 0,
       widthMM: Number(formData.widthMM) || 0,
@@ -99,23 +98,20 @@ export default function AddRawMaterialPage() {
       installationTimeMins: Number(formData.installationTimeMins) || 0,
       weightKgs: Number(formData.weightKgs) || 0,
     }));
-    
+
     if (formData.supplier) data.append("supplier", formData.supplier);
     data.append("rawMaterialPrice", formData.rawMaterialPrice);
     if (formData.supplierSKU) data.append("supplierSKU", formData.supplierSKU);
-    
+
+    // Theme still has single thumbnail upload
     if (formData.thumbnail) data.append("thumbnail", formData.thumbnail);
-    
-    if (formData.images && formData.images.length > 0) {
-      formData.images.forEach(img => data.append("images", img));
-    }
 
     if (formData.generatedSKU) data.append("sku", formData.generatedSKU);
 
     try {
-      await dispatch(createRawMaterial(data)).unwrap();
+      await dispatch(createTheme(data)).unwrap();
       setSubmitted(true);
-      router.push("/dashboard/products/raw-materials");
+      router.push("/dashboard/themes");
     } catch (err) {
       // Error handled in slice/toast
     }
@@ -140,16 +136,15 @@ export default function AddRawMaterialPage() {
   // ── Success Screen ──────────────────────────────────────────────────────────
   if (submitted) {
     return (
-      // BUG 1 FIX: pt-20 to clear topbar
       <div className="min-h-[80vh] flex items-center justify-center p-6 pt-20 bg-slate-50">
         <div className="max-w-md w-full text-center space-y-6">
           <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto bg-secondary-50">
             <Icon icon="solar:check-circle-bold" style={{ fontSize: 52 }} className="text-secondary-500" />
           </div>
           <div>
-            <h2 className="text-2xl text-primary-600">Raw Material Added!</h2>
+            <h2 className="text-2xl text-primary-600">Theme Added!</h2>
             <p className="text-primary-400 text-sm mt-2">
-              The product has been submitted successfully.
+              The theme has been submitted successfully.
             </p>
             {formData.generatedSKU && (
               <div className="mt-4 p-4 bg-primary-50 rounded-xl border border-primary-200">
@@ -190,10 +185,10 @@ export default function AddRawMaterialPage() {
         <div className="flex items-center justify-between pt-4">
           <div>
             <h1 className="text-2xl font-semibold text-primary-600">
-              Add Raw Material
+              Add Theme
             </h1>
             <p className="text-sm mt-0.5 text-primary-400">
-              Fill in the details below to add a new raw product
+              Fill in the details below to add a new theme
             </p>
           </div>
           <div className="hidden sm:flex items-center gap-2 px-3.5 py-2 bg-white rounded-xl border border-gray-200 shadow-sm">
@@ -214,7 +209,7 @@ export default function AddRawMaterialPage() {
           />
         </div>
 
-        {/* Form Card — key={step} triggers CSS fade animation on step change */}
+        {/* Form Card */}
         <div
           key={step}
           className="bg-white rounded-2xl border border-gray-100 shadow-md p-6 sm:p-8 animate-fadeIn"
@@ -224,7 +219,7 @@ export default function AddRawMaterialPage() {
               data={formData}
               onChange={updateForm}
               onNext={handleNext}
-              productType="raw"
+              productType="theme"
             />
           )}
           {step === 2 && (
@@ -233,7 +228,8 @@ export default function AddRawMaterialPage() {
               onChange={updateForm}
               onNext={handleNext}
               onBack={handleBack}
-              productType="raw"
+              hideImages={true}
+              productType="theme"
             />
           )}
           {step === 3 && (
@@ -244,7 +240,7 @@ export default function AddRawMaterialPage() {
               onNext={handleNext}
               onBack={handleBack}
               onCreateSupplier={handleCreateSupplier}
-              productType="raw"
+              productType="theme"
             />
           )}
           {step === 4 && (
@@ -254,7 +250,8 @@ export default function AddRawMaterialPage() {
               onBack={handleBack}
               onSubmit={handleSubmit}
               loading={loading}
-              productType="raw"
+              hideImages={true}
+              productType="theme"
             />
           )}
         </div>

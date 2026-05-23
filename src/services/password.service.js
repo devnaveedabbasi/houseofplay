@@ -1,11 +1,11 @@
-import dbConnect from '@/lib/db';
+import dbConnect from '@/config/db';
 import User from '@/models/User';
 import bcrypt from 'bcryptjs';
 import { ApiError } from '@/utils/ApiError';
 import { ApiResponse } from '@/utils/ApiResponse';
 import { signToken, verifyToken } from '@/utils/jwt';
 import nodemailer from 'nodemailer';
-import config from '@/lib/config';
+import config from '@/config/index';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 

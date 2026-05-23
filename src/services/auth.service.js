@@ -1,4 +1,4 @@
-import dbConnect from '@/lib/db';
+import dbConnect from '@/config/db';
 import User from '@/models/User';
 import bcrypt from 'bcryptjs';
 import { sendOtpEmail } from '@/services/mailer.service';

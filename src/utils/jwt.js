@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import config from '@/lib/config';
+import config from '@/config/index';
 
 /**
  * Sign a JWT for the given user.

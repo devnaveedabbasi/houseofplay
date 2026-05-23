@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import config from '@/lib/config';
+import config from '@/config';
 
 /**
  * Global cache to reuse the connection across hot-reloads in dev.
@@ -23,7 +23,7 @@ const dbConnect = async () => {
     cached.promise = mongoose
       .connect(config.database.url, config.database.options)
       .then((mongoose) => {
-        console.log(`✅ MongoDB Connected: ${mongoose.connection.host}`);
+        console.log(` MongoDB Connected: ${mongoose.connection.host}`);
         return mongoose;
       });
   }

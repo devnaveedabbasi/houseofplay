@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import config from '@/lib/config';
+import config from '@/config/index';
 
 /**
  * Lazy-initialized transporter to avoid module-load errors

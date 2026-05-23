@@ -32,7 +32,7 @@ export async function middleware(request) {
     if (!tokenValid) {
       const loginUrl = new URL('/auth/login', request.url);
       loginUrl.searchParams.set('callbackUrl', pathname);
-      return NextResponse.redirect(loginUrl);   // ✅ Yahi asli guard hai
+      return NextResponse.redirect(loginUrl);   //  Yahi asli guard hai
     }
     return NextResponse.next();
   }

@@ -5,10 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrentUser } from '@/store/authSlice';
 import { Icon } from '@iconify/react';
-import AdminDashboard from '@/components/dashboard/AdminDashboard';
-import ManagerDashboard from '@/components/dashboard/ManagerDashboard';
-import UserDashboard from '@/components/dashboard/UserDashboard';
-
 export default function DashboardPage() {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -18,7 +14,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     const token = localStorage.getItem('token') || localStorage.getItem('authToken');
-    
+
     if (!token && !isAuthenticated) {
       router.replace('/auth/login');
     } else if (token && !isAuthenticated) {
@@ -30,14 +26,18 @@ export default function DashboardPage() {
     }
   }, [dispatch, isAuthenticated, router]);
 
-  // ✅ Agar loading khatam ho gayi aur authenticated nahi hai toh login pe bhejo
+  // Redirect logic
   useEffect(() => {
-    if (!isInitializing && !loading && !isAuthenticated && !user) {
-      router.replace('/auth/login');
+    if (!isInitializing && !loading) {
+      if (isAuthenticated && user) {
+        router.replace('/dashboard/products');
+      } else if (!isAuthenticated && !user) {
+        router.replace('/auth/login');
+      }
     }
   }, [loading, isAuthenticated, user, router, isInitializing]);
 
-  // ✅ Loading state
+  //  Loading state
   if (loading || isInitializing) {
     return (
       <div className="flex h-full min-h-[60vh] items-center justify-center">
@@ -49,18 +49,9 @@ export default function DashboardPage() {
     );
   }
 
-  // ✅ Na authenticated, na user — redirect ho raha hai, kuch mat dikhao
   if (!isAuthenticated || !user) {
     return null;
   }
 
-  // ✅ Role ke hisaab se dashboard dikhao
-  switch (user.role) {
-    case 'admin':
-      return <AdminDashboard user={user} />;
-    case 'manager':
-      return <ManagerDashboard user={user} />;
-    default:
-      return <UserDashboard user={user} />;
-  }
+
 }
