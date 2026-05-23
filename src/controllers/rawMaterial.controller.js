@@ -55,7 +55,7 @@ export async function createRawMaterialController(request, { user }) {
       measurements = JSON.parse(measurementsRaw);
     }
 
-    if (!productName || !denominationPackSize || !rawMaterialPrice) {
+    if (!productName || isNaN(denominationPackSize) || isNaN(rawMaterialPrice)) {
       throw new ApiError(400, 'productName, denominationPackSize, and rawMaterialPrice are required.');
     }
 

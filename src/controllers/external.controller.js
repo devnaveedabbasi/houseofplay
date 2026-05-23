@@ -54,7 +54,7 @@ export async function createExternalController(request, { user }) {
       measurements = JSON.parse(measurementsRaw);
     }
 
-    if (!productName || !denominationPackSize || !externalPrice) {
+    if (!productName || isNaN(denominationPackSize) || isNaN(externalPrice)) {
       throw new ApiError(400, 'productName, denominationPackSize, and externalPrice are required.');
     }
 

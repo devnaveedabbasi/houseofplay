@@ -54,7 +54,7 @@ export async function createThemeController(request, { user }) {
       measurements = JSON.parse(measurementsRaw);
     }
 
-    if (!productName || !denominationPackSize || !themePrice) {
+    if (!productName || isNaN(denominationPackSize) || isNaN(themePrice)) {
       throw new ApiError(400, 'productName, denominationPackSize, and themePrice are required.');
     }
 
