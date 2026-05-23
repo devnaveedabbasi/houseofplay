@@ -43,7 +43,7 @@ export async function createExternalController(request, { user }) {
     const standard = formData.get('standard') === 'true';
     const description = formData.get('description');
     const denominationPackSize = Number(formData.get('denominationPackSize'));
-    const rawMaterialPrice = Number(formData.get('rawMaterialPrice'));
+    const externalPrice = Number(formData.get('externalPrice'));
     const supplier = formData.get('supplier');
     const supplierSKU = formData.get('supplierSKU');
     const sku = formData.get('sku');
@@ -54,8 +54,8 @@ export async function createExternalController(request, { user }) {
       measurements = JSON.parse(measurementsRaw);
     }
 
-    if (!productName || !denominationPackSize || !rawMaterialPrice) {
-      throw new ApiError(400, 'productName, denominationPackSize, and rawMaterialPrice are required.');
+    if (!productName || !denominationPackSize || !externalPrice) {
+      throw new ApiError(400, 'productName, denominationPackSize, and externalPrice are required.');
     }
 
     // Handle single file
@@ -81,7 +81,7 @@ export async function createExternalController(request, { user }) {
       thumbnail: thumbnailUrl,
       measurements,
       supplier, // assuming it's an ObjectId string
-      rawMaterialPrice,
+      externalPrice,
       supplierSKU,
       sku,
       createdBy: user?.userId,
@@ -148,7 +148,7 @@ export async function updateExternalController(request, { params }) {
     if (formData.has('standard')) external.standard = formData.get('standard') === 'true';
     if (formData.has('description')) external.description = formData.get('description');
     if (formData.has('denominationPackSize')) external.denominationPackSize = Number(formData.get('denominationPackSize'));
-    if (formData.has('rawMaterialPrice')) external.rawMaterialPrice = Number(formData.get('rawMaterialPrice'));
+    if (formData.has('externalPrice')) external.externalPrice = Number(formData.get('externalPrice'));
     if (formData.has('supplier')) external.supplier = formData.get('supplier');
     if (formData.has('supplierSKU')) external.supplierSKU = formData.get('supplierSKU');
     if (formData.has('sku')) external.sku = formData.get('sku');

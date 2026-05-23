@@ -29,18 +29,18 @@ const INITIAL_FORM = {
   denominationPackSize: "1",
 
   // Step 2
-  lengthMM: "0",
-  widthMM: "0",
-  heightMM: "0",
-  installationTimeMins: "0",
-  weightKgs: "0",
+  lengthMM: 0,
+  widthMM: 0,
+  heightMM: 0,
+  installationTimeMins: 0,
+  weightKgs: 0,
 
   // No multiple images for external
   images: [],
 
   // Step 3
   supplier: "",
-  rawMaterialPrice: "0",
+  externalPrice: "0",
   supplierSKU: "",
 };
 
@@ -100,7 +100,7 @@ export default function AddExternalPage() {
     }));
 
     if (formData.supplier) data.append("supplier", formData.supplier);
-    data.append("rawMaterialPrice", formData.rawMaterialPrice);
+    data.append("externalPrice", formData.externalPrice);
     if (formData.supplierSKU) data.append("supplierSKU", formData.supplierSKU);
 
     // External still has single thumbnail upload

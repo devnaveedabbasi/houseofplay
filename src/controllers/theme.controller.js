@@ -43,7 +43,7 @@ export async function createThemeController(request, { user }) {
     const standard = formData.get('standard') === 'true';
     const description = formData.get('description');
     const denominationPackSize = Number(formData.get('denominationPackSize'));
-    const rawMaterialPrice = Number(formData.get('rawMaterialPrice'));
+    const themePrice = Number(formData.get('themePrice'));
     const supplier = formData.get('supplier');
     const supplierSKU = formData.get('supplierSKU');
     const sku = formData.get('sku');
@@ -54,8 +54,8 @@ export async function createThemeController(request, { user }) {
       measurements = JSON.parse(measurementsRaw);
     }
 
-    if (!productName || !denominationPackSize || !rawMaterialPrice) {
-      throw new ApiError(400, 'productName, denominationPackSize, and rawMaterialPrice are required.');
+    if (!productName || !denominationPackSize || !themePrice) {
+      throw new ApiError(400, 'productName, denominationPackSize, and themePrice are required.');
     }
 
     // Handle single file
@@ -81,7 +81,7 @@ export async function createThemeController(request, { user }) {
       thumbnail: thumbnailUrl,
       measurements,
       supplier, // assuming it's an ObjectId string
-      rawMaterialPrice,
+      themePrice,
       supplierSKU,
       sku,
       createdBy: user?.userId,
@@ -148,7 +148,7 @@ export async function updateThemeController(request, { params }) {
     if (formData.has('standard')) theme.standard = formData.get('standard') === 'true';
     if (formData.has('description')) theme.description = formData.get('description');
     if (formData.has('denominationPackSize')) theme.denominationPackSize = Number(formData.get('denominationPackSize'));
-    if (formData.has('rawMaterialPrice')) theme.rawMaterialPrice = Number(formData.get('rawMaterialPrice'));
+    if (formData.has('themePrice')) theme.themePrice = Number(formData.get('themePrice'));
     if (formData.has('supplier')) theme.supplier = formData.get('supplier');
     if (formData.has('supplierSKU')) theme.supplierSKU = formData.get('supplierSKU');
     if (formData.has('sku')) theme.sku = formData.get('sku');

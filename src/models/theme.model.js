@@ -41,7 +41,7 @@ const themeSchema = new mongoose.Schema(
     supplierName: {
       type: String, // If new supplier added inline without ID
     },
-    rawMaterialPrice: {
+    themePrice: {
       type: Number,
       required: true,
     },

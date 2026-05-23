@@ -16,13 +16,7 @@ const errorCls = "text-xs text-red-500 mt-1";
 
 const ADD_NEW_VALUE = "__add_new__";
 
-const step3Schema = yup.object().shape({
-  supplier: yup.string().required("Please select a supplier."),
-  rawMaterialPrice: yup
-    .number()
-    .typeError("Must be a valid number.")
-    .required("Raw Material Price is required."),
-});
+// Schema generation will be dynamic inside component
 
 export default function Step3SupplierInfo({ data, suppliers = [], onChange, onNext, onBack, onCreateSupplier, productType = "raw" }) {
   const [errors, setErrors] = useState({});
@@ -30,9 +24,20 @@ export default function Step3SupplierInfo({ data, suppliers = [], onChange, onNe
   const [newSupplierName, setNewSupplierName] = useState("");
   const [newSupplierError, setNewSupplierError] = useState("");
 
+  const priceField = productType === "theme" ? "themePrice" : productType === "external" ? "externalPrice" : "rawMaterialPrice";
+  const priceLabel = productType === "theme" ? "Theme Price" : productType === "external" ? "External Price" : "Raw Material Price";
+
   const validate = async () => {
     try {
-      await step3Schema.validate(data, { abortEarly: false });
+      const dynamicSchema = yup.object().shape({
+        supplier: yup.string().required("Please select a supplier."),
+        [priceField]: yup
+          .number()
+          .typeError("Must be a valid number.")
+          .min(0, `${priceLabel.replace(' (PKR)', '')} cannot be negative.`)
+          .required(`${priceLabel.replace(' (PKR)', '')} is required.`),
+      });
+      await dynamicSchema.validate(data, { abortEarly: false });
       return {};
     } catch (err) {
       const e = {};
@@ -164,19 +169,20 @@ export default function Step3SupplierInfo({ data, suppliers = [], onChange, onNe
         </div>
       </div>
 
-      {/* Raw Material Price */}
+      {/* Dynamic Price */}
       <div>
         <label className={labelCls}>
-          {productType === "theme" ? "Theme Price" : productType === "external" ? "External Price" : "Raw Material Price"} <span className="text-red-500">*</span>
+          {priceLabel} <span className="text-red-500">*</span>
         </label>
         <input
           type="number"
+          min="0"
           placeholder="0.00"
-          value={data.rawMaterialPrice ?? ""}
-          onChange={(e) => set("rawMaterialPrice", e.target.value)}
-          className={`${inputCls} ${errors.rawMaterialPrice ? "border-red-400 bg-red-50/30" : ""}`}
+          value={data[priceField] ?? ""}
+          onChange={(e) => set(priceField, e.target.value)}
+          className={`${inputCls} ${errors[priceField] ? "border-red-400 bg-red-50/30" : ""}`}
         />
-        {errors.rawMaterialPrice && <p className={errorCls}>{errors.rawMaterialPrice}</p>}
+        {errors[priceField] && <p className={errorCls}>{errors[priceField]}</p>}
       </div>
 
       {/* Supplier SKU */}

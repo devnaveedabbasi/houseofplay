@@ -21,19 +21,22 @@ export default function Step4ReviewSubmit({
         return {
           title: "Review Your New Theme",
           price: "Theme Price",
+          priceField: "themePrice",
           createBtn: "Create Theme",
         };
       case "external":
         return {
           title: "Review Your New External Product",
           price: "External Price",
+          priceField: "externalPrice",
           createBtn: "Create External",
         };
       case "raw":
       default:
         return {
           title: "Review Your New Raw Material",
-          price: "Raw Price",
+          price: "Raw Material Price",
+          priceField: "rawMaterialPrice",
           createBtn: "Create Raw",
         };
     }
@@ -117,7 +120,7 @@ export default function Step4ReviewSubmit({
                 </p>
 
                 <p>
-                  <b>{labels.price}:</b> £ {data.rawMaterialPrice || "0.00"}
+                  <b>{labels.price}:</b> £ {data[labels.priceField] || "0.00"}
                 </p>
                 {data.supplierSKU && (
                   <p>
@@ -129,23 +132,21 @@ export default function Step4ReviewSubmit({
           </div>
 
           {/* DIMENSIONS (Hidden if all 0) */}
-          {(Number(data.lengthMM) > 0 || Number(data.widthMM) > 0 || Number(data.heightMM) > 0 || Number(data.weightKgs) > 0) && (
-            <div className="grid md:grid-cols-2 gap-6 pt-4 border-t border-gray-100">
-              <div>
-                <h2 className="text-lg font-semibold text-gray-800">
-                  Dimensions & Weight
-                </h2>
+     <div className="grid md:grid-cols-2 gap-6 pt-4 border-t border-gray-100">
+  <div>
+    <h2 className="text-lg font-semibold text-gray-800">
+      Dimensions & Weight
+    </h2>
 
-                <div className="mt-2 space-y-1 text-sm text-gray-600">
-                  {Number(data.lengthMM) > 0 && <p><b>Length:</b> {data.lengthMM} MM</p>}
-                  {Number(data.widthMM) > 0 && <p><b>Width:</b> {data.widthMM} MM</p>}
-                  {Number(data.heightMM) > 0 && <p><b>Height:</b> {data.heightMM} MM</p>}
-                  {Number(data.installationTimeMins) > 0 && <p><b>Installation Time:</b> {data.installationTimeMins} MINS</p>}
-                  {Number(data.weightKgs) > 0 && <p><b>Weight:</b> {data.weightKgs} KGS</p>}
-                </div>
-              </div>
-            </div>
-          )}
+    <div className="mt-2 space-y-1 text-sm text-gray-600">
+      <p><b>Length:</b> {data.lengthMM || 0} MM</p>
+      <p><b>Width:</b> {data.widthMM || 0} MM</p>
+      <p><b>Height:</b> {data.heightMM || 0} MM</p>
+      <p><b>Installation Time:</b> {data.installationTimeMins || 0} MINS</p>
+      <p><b>Weight:</b> {data.weightKgs || 0} KGS</p>
+    </div>
+  </div>
+</div>
 
   <div>
           <h2 className="text-lg font-semibold text-gray-800 mb-2">

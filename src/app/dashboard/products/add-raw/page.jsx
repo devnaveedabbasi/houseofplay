@@ -28,11 +28,11 @@ const INITIAL_FORM = {
   denominationPackSize: "1",
 
   // Step 2
-  lengthMM: "0",
-  widthMM: "0",
-  heightMM: "0",
-  installationTimeMins: "0",
-  weightKgs: "0",
+  lengthMM: 0,
+  widthMM: 0,
+  heightMM: 0,
+  installationTimeMins: 0,
+  weightKgs: 0,
 
   images: [
   ],

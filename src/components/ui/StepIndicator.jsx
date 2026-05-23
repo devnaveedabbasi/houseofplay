@@ -55,7 +55,7 @@ export default function StepIndicator({
                     ? { backgroundColor: "#4CA048", boxShadow: "0 4px 12px rgba(76,160,72,0.35)" }
                     : isActive
                     ? {
-                        backgroundColor: "#4CA048",
+                        backgroundColor: "#3e853b",
                         boxShadow: "0 4px 14px rgba(76,160,72,0.4)",
                         ringColor: "rgba(76,160,72,0.25)",
                         outline: "4px solid rgba(76,160,72,0.2)",

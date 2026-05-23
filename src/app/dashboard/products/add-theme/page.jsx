@@ -29,19 +29,19 @@ const INITIAL_FORM = {
   denominationPackSize: "1",
 
   // Step 2
-  lengthMM: "0",
-  widthMM: "0",
-  heightMM: "0",
-  installationTimeMins: "0",
-  weightKgs: "0",
+  lengthMM: 0,
+  widthMM: 0,
+  heightMM: 0,
+  installationTimeMins: 0,
+  weightKgs: 0,
 
   // No multiple images for theme
   images: [],
 
   // Step 3
-  supplier: "",
-  rawMaterialPrice: "0",
-  supplierSKU: "",
+  supplier: "WoodCraft Industries",
+  themePrice: "1250",
+  supplierSKU: "WCP-2400-XL",
 };
 
 const STEP_LABELS = ["Product Details", "Measurements", "Supplier Info", "Review"];
@@ -100,7 +100,7 @@ export default function AddThemePage() {
     }));
 
     if (formData.supplier) data.append("supplier", formData.supplier);
-    data.append("rawMaterialPrice", formData.rawMaterialPrice);
+    data.append("themePrice", formData.themePrice);
     if (formData.supplierSKU) data.append("supplierSKU", formData.supplierSKU);
 
     // Theme still has single thumbnail upload

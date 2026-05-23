@@ -41,7 +41,7 @@ const externalSchema = new mongoose.Schema(
     supplierName: {
       type: String, // If new supplier added inline without ID
     },
-    rawMaterialPrice: {
+    externalPrice: {
       type: Number,
       required: true,
     },
