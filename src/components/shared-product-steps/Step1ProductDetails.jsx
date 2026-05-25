@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { Upload, X } from "lucide-react";
 import * as yup from "yup";
 import StepWrapper from "@/components/ui/StepWrapper";
+import Image from "next/image";
 
 // Shared field styles
 const inputCls = `
@@ -34,6 +35,7 @@ const step1Schema = yup.object().shape({
 
 export default function Step1ProductDetails({ data, onChange, onNext, productType = "raw" }) {
   const [errors, setErrors] = useState({});
+  const [lightboxImg, setLightboxImg] = useState(null);
   const thumbRef = useRef(null);
 
   const labels = {
@@ -104,42 +106,39 @@ export default function Step1ProductDetails({ data, onChange, onNext, productTyp
       </div>
 
       {/* Standard Toggle */}
-<div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100">
-  <div>
-    <FieldLabel required>Standard</FieldLabel>
-    <p className="text-xs text-gray-400 -mt-1">
-      Is this a standard?
-    </p>
-  </div>
+      <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100">
+        <div>
+          <FieldLabel required>Standard</FieldLabel>
+          <p className="text-xs text-gray-400 -mt-1">
+            Is this a standard?
+          </p>
+        </div>
 
-  <div className="flex items-center gap-3">
-    
-    {/* YES / NO TEXT */}
-    <span
-      className={`text-sm font-medium transition-colors ${
-        data.standard ? "text-secondary-500" : "text-gray-400"
-      }`}
-    >
-      {data.standard ? "Yes" : "No"}
-    </span>
+        <div className="flex items-center gap-3">
 
-    {/* TOGGLE */}
-    <button
-      type="button"
-      onClick={() => set("standard", !data.standard)}
-      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${
-        data.standard ? "bg-secondary-500" : "bg-gray-300"
-      }`}
-    >
-      <span
-        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-          data.standard ? "translate-x-6" : "translate-x-1"
-        }`}
-      />
-    </button>
+          {/* YES / NO TEXT */}
+          <span
+            className={`text-sm font-medium transition-colors ${data.standard ? "text-secondary-500" : "text-gray-400"
+              }`}
+          >
+            {data.standard ? "Yes" : "No"}
+          </span>
 
-  </div>
-</div>
+          {/* TOGGLE */}
+          <button
+            type="button"
+            onClick={() => set("standard", !data.standard)}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${data.standard ? "bg-secondary-500" : "bg-gray-300"
+              }`}
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${data.standard ? "translate-x-6" : "translate-x-1"
+                }`}
+            />
+          </button>
+
+        </div>
+      </div>
       {errors.standard && <p className={errorCls}>{errors.standard}</p>}
       {/* BUG 3 FIX: Product Thumbnail upload — after Standard, before Description */}
 
@@ -152,9 +151,8 @@ export default function Step1ProductDetails({ data, onChange, onNext, productTyp
             <span className="text-xs text-gray-400 font-normal">(Optional)</span>
           </div>
           <span
-            className={`text-xs font-medium ${
-              charCount > 950 ? "text-red-500" : charCount > 800 ? "text-amber-500" : "text-gray-400"
-            }`}
+            className={`text-xs font-medium ${charCount > 950 ? "text-red-500" : charCount > 800 ? "text-amber-500" : "text-gray-400"
+              }`}
           >
             {charCount} / 1000
           </span>
@@ -244,5 +242,6 @@ export default function Step1ProductDetails({ data, onChange, onNext, productTyp
       </div>
 
     </StepWrapper>
+
   );
 }

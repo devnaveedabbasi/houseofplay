@@ -57,7 +57,7 @@ const baseNav = [
     groupIcon: Settings,
     items: [
       { name: "Reports", href: "/dashboard/reports", icon: BarChart2 },
-      { name: "Platform Settings", href: "/dashboard/settings", icon: Settings },
+      { name: "Platform Settings", href: "/dashboard/platform-settings", icon: Settings },
       { name: "Change Password", href: "/dashboard/change-password", icon: UserCog },
     ],
   },

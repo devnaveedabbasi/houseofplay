@@ -5,6 +5,7 @@ import { Icon } from "@iconify/react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSuppliers, createSupplier, createRawMaterial } from "@/store/rawMaterialSlice";
+import { fetchSettings } from "@/store/platformSettingsSlice";
 import { useRouter } from "next/navigation";
 import { generateSKU } from "@/utils/generateSKU";
 import StepIndicator from "@/components/ui/StepIndicator";
@@ -12,6 +13,8 @@ import Step1ProductDetails from "@/components/shared-product-steps/Step1ProductD
 import Step2Measurements from "@/components/shared-product-steps/Step2Measurements";
 import Step3SupplierInfo from "@/components/shared-product-steps/Step3SupplierInfo";
 import Step4ReviewSubmit from "@/components/shared-product-steps/Step4ReviewSubmit";
+import ProductGuideViewer from "@/components/shared-product-steps/ProductGuideViewer";
+
 
 
 
@@ -63,7 +66,10 @@ export default function AddRawMaterialPage() {
       .unwrap()
       .catch(() => {}) // Ignore fetch errors here
       .finally(() => setIsPageLoading(false));
+
+    dispatch(fetchSettings());
   }, [dispatch]);
+
 
   // BUG 1 FIX: scroll to top on step change, accounting for topbar
   useEffect(() => {
@@ -258,6 +264,13 @@ export default function AddRawMaterialPage() {
             />
           )}
         </div>
+
+        {/* Persistent Guide Viewer across steps 1, 2, 3 */}
+        {step >= 1 && step <= 3 && (
+          <div className="animate-fadeIn mt-6">
+            <ProductGuideViewer productType="raw" />
+          </div>
+        )}
       </div>
     </div>
   );

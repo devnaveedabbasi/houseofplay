@@ -3,6 +3,7 @@ import authReducer from './authSlice';
 import rawMaterialReducer from './rawMaterialSlice';
 import themeReducer from './themeSlice';
 import externalReducer from './externalSlice';
+import platformSettingsReducer from './platformSettingsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     rawMaterial: rawMaterialReducer,
     theme: themeReducer,
     external: externalReducer,
+    platformSettings: platformSettingsReducer,
   },
 });
