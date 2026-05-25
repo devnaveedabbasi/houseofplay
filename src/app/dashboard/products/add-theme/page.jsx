@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSuppliers, createSupplier } from "@/store/rawMaterialSlice";
-import { createTheme } from "@/store/themeSlice";
+import { fetchSuppliers, createSupplier, createProduct } from "@/store/productSlice";
 import { useRouter } from "next/navigation";
 import { generateSKU } from "@/utils/generateSKU";
 import StepIndicator from "@/components/ui/StepIndicator";
@@ -39,9 +38,9 @@ const INITIAL_FORM = {
   images: [],
 
   // Step 3
-  supplier: "WoodCraft Industries",
-  themePrice: "1250",
-  supplierSKU: "WCP-2400-XL",
+  supplier: "",
+  themePrice: "0",
+  supplierSKU: "",
 };
 
 const STEP_LABELS = ["Product Details", "Measurements", "Supplier Info", "Review"];
@@ -54,15 +53,14 @@ export default function AddThemePage() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { suppliers } = useSelector((state) => state.rawMaterial);
-  const { loading } = useSelector((state) => state.theme);
+  const { suppliers, loading } = useSelector((state) => state.product);
 
   const [isPageLoading, setIsPageLoading] = useState(true);
 
   useEffect(() => {
     dispatch(fetchSuppliers())
       .unwrap()
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setIsPageLoading(false));
   }, [dispatch]);
 
@@ -106,10 +104,11 @@ export default function AddThemePage() {
     // Theme still has single thumbnail upload
     if (formData.thumbnail) data.append("thumbnail", formData.thumbnail);
 
+    data.append("productType", "theme");
     if (formData.generatedSKU) data.append("sku", formData.generatedSKU);
 
     try {
-      await dispatch(createTheme(data)).unwrap();
+      await dispatch(createProduct(data)).unwrap();
       setSubmitted(true);
       router.push("/dashboard/themes");
     } catch (err) {
@@ -255,6 +254,8 @@ export default function AddThemePage() {
             />
           )}
         </div>
+
+   
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { X, Info } from "lucide-react";
 import { useSelector } from "react-redux";
 import Image from "next/image";
+import { createPortal } from "react-dom";
 
 export default function ProductGuideViewer({ productType }) {
   const [lightboxImg, setLightboxImg] = useState(null);
@@ -56,30 +57,31 @@ export default function ProductGuideViewer({ productType }) {
         </div>
       )}
 
-      {/* Lightbox Modal */}
-      {lightboxImg && (
+      {/* Lightbox Modal (Portal) */}
+      {lightboxImg && typeof document !== "undefined" && createPortal(
         <div
-          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
+          className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center p-4"
           onClick={() => setLightboxImg(null)}
         >
           <button
             onClick={() => setLightboxImg(null)}
-            className="absolute top-10 right-4 z-10 bg-black text-white rounded-full p-3 shadow-lg hover:bg-gray-800 transition-colors"
+            className="absolute top-10 right-4 z-[10000] bg-black text-white rounded-full p-3 shadow-lg hover:bg-gray-800 transition-colors"
           >
             <X size={28} />
           </button>
-          <div className="relative flex items-center justify-center">
+          <div className="relative flex items-center justify-center w-full h-full max-w-5xl">
             <Image
               src={lightboxImg}
               alt="Guide Image Fullscreen"
               width={1200}
               height={800}
-              className="max-w-full max-h-[95vh] object-contain rounded-xl shadow-2xl"
+              className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
               onClick={(e) => e.stopPropagation()}
               priority
             />
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

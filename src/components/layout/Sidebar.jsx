@@ -34,7 +34,7 @@ const baseNav = [
     groupIcon: Package,
     items: [
       { name: "All Products", href: "/dashboard/products", icon: Package },
-      { name: "Estimate", href: "/dashboard/estimate", icon: Package },
+      { name: "Estimate", href: "/dashboard/estimates", icon: Package },
       { name: "Add Raw", href: "/dashboard/products/add-raw", icon: Package },
       { name: "Add Theme", href: "/dashboard/products/add-theme", icon: Package },
       { name: "Variants", href: "/dashboard/products/variants", icon: Package },

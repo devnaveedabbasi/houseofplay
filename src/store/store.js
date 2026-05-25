@@ -1,16 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
-import rawMaterialReducer from './rawMaterialSlice';
-import themeReducer from './themeSlice';
-import externalReducer from './externalSlice';
+import productReducer from './productSlice';
 import platformSettingsReducer from './platformSettingsSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    rawMaterial: rawMaterialReducer,
-    theme: themeReducer,
-    external: externalReducer,
+    product: productReducer,
     platformSettings: platformSettingsReducer,
   },
 });

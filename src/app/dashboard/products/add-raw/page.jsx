@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSuppliers, createSupplier, createRawMaterial } from "@/store/rawMaterialSlice";
+import { fetchSuppliers, createSupplier, createProduct } from "@/store/productSlice";
 import { fetchSettings } from "@/store/platformSettingsSlice";
 import { useRouter } from "next/navigation";
 import { generateSKU } from "@/utils/generateSKU";
@@ -57,7 +57,7 @@ export default function AddRawMaterialPage() {
   const [submitted, setSubmitted] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
-  const { suppliers, loading } = useSelector((state) => state.rawMaterial);
+  const { suppliers, loading } = useSelector((state) => state.product);
 
   const [isPageLoading, setIsPageLoading] = useState(true);
 
@@ -116,10 +116,11 @@ export default function AddRawMaterialPage() {
       formData.images.forEach(img => data.append("images", img));
     }
 
+    data.append("productType", "raw");
     if (formData.generatedSKU) data.append("sku", formData.generatedSKU);
 
     try {
-      await dispatch(createRawMaterial(data)).unwrap();
+      await dispatch(createProduct(data)).unwrap();
       setSubmitted(true);
       router.push("/dashboard/products/raw-materials");
     } catch (err) {

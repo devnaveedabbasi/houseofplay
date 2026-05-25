@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSuppliers, createSupplier } from "@/store/rawMaterialSlice";
-import { createExternal } from "@/store/externalSlice";
+import { fetchSuppliers, createSupplier, createProduct } from "@/store/productSlice";
 import { useRouter } from "next/navigation";
 import { generateSKU } from "@/utils/generateSKU";
 import StepIndicator from "@/components/ui/StepIndicator";
@@ -54,15 +53,14 @@ export default function AddExternalPage() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { suppliers } = useSelector((state) => state.rawMaterial);
-  const { loading } = useSelector((state) => state.external);
+  const { suppliers, loading } = useSelector((state) => state.product);
 
   const [isPageLoading, setIsPageLoading] = useState(true);
 
   useEffect(() => {
     dispatch(fetchSuppliers())
       .unwrap()
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setIsPageLoading(false));
   }, [dispatch]);
 
@@ -106,10 +104,11 @@ export default function AddExternalPage() {
     // External still has single thumbnail upload
     if (formData.thumbnail) data.append("thumbnail", formData.thumbnail);
 
+    data.append("productType", "external");
     if (formData.generatedSKU) data.append("sku", formData.generatedSKU);
 
     try {
-      await dispatch(createExternal(data)).unwrap();
+      await dispatch(createProduct(data)).unwrap();
       setSubmitted(true);
       router.push("/dashboard/externals"); // Adjust this route to wherever externals list lives
     } catch (err) {
@@ -255,6 +254,7 @@ export default function AddExternalPage() {
             />
           )}
         </div>
+
       </div>
     </div>
   );
